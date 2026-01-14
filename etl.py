@@ -11,15 +11,15 @@ connector = pymysql.connect(
     host="localhost",
     user="root",
     password="root",
-    port=3306,
-    database="weather_events_db"   # MUST match schema.sql
+    database="weather_events_db",
+    port=3306
 )
 
 cursor = connector.cursor()
 print("MySQL connection successful")
 
 # =========================================================
-# City → Latitude & Longitude Mapping
+# City → Latitude & Longitude
 # =========================================================
 
 CITY_COORDS = {
@@ -29,7 +29,7 @@ CITY_COORDS = {
 }
 
 # =========================================================
-# Weather API Function (Open-Meteo)
+# Weather API (Open-Meteo)
 # =========================================================
 
 def get_weather(city, date):
@@ -53,19 +53,20 @@ def get_weather(city, date):
     return temperature, rain, snow
 
 # =========================================================
-# Read CSV File
+# Read CSV
 # =========================================================
 
 file_path = "data/events.csv"
 
 if not os.path.exists(file_path):
-    raise FileNotFoundError(f"CSV file not found at: {file_path}")
+    raise FileNotFoundError(f"CSV not found: {file_path}")
 
 events_df = pd.read_csv(file_path)
 print("CSV file loaded successfully")
+print(events_df.head())
 
 # =========================================================
-# Insert Query
+# Insert SQL
 # =========================================================
 
 insert_sql = """
@@ -75,23 +76,33 @@ VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
 """
 
 # =========================================================
-# ETL Process
+# ETL PROCESS
 # =========================================================
 
+outdoor_keywords = ["Outdoor", "Open", "Street", "Marathon", "Festival"]
+
 for _, row in events_df.iterrows():
+    event_name = None
+
     try:
-        event_name = row["Event Name"]
-        venue = row["Venue"]
-        city = row["City"]
-        event_date = pd.to_datetime(row["Date"]).strftime("%Y-%m-%d")
+        event_name = row["event_name"]
+        venue = row["venue"]
+        city = row["city"]
+        event_date = pd.to_datetime(row["event_date"]).strftime("%Y-%m-%d")
 
         if city not in CITY_COORDS:
-            print(f"City not supported: {city}")
+            print(f"Unsupported city: {city}")
             continue
 
         temperature, rain, snow = get_weather(city, event_date)
 
-        weather_risk = "High Risk" if rain > 0 or snow > 0 else "Low Risk"
+        # Business logic for weather risk
+        is_outdoor = any(word.lower() in event_name.lower() for word in outdoor_keywords)
+
+        if rain >= 5 or snow > 0 or (is_outdoor and temperature >= 32):
+            weather_risk = "High Risk"
+        else:
+            weather_risk = "Low Risk"
 
         cursor.execute(
             insert_sql,
@@ -108,13 +119,13 @@ for _, row in events_df.iterrows():
         )
 
         connector.commit()
-        print(f"Inserted: {event_name} | {city} | {event_date}")
+        print(f"Inserted: {event_name} | {weather_risk}")
 
     except pymysql.err.IntegrityError:
-        print(f"Duplicate skipped: {event_name} | {event_date}")
+        print(f"Duplicate skipped: {event_name}")
 
     except Exception as e:
-        print(f"Error processing {event_name}: {e}")
+        print(f"Error processing row: {e}")
 
 # =========================================================
 # Close Connection

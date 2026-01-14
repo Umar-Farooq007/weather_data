@@ -1,21 +1,21 @@
-Event Name,Venue,City,Date
-Music Fest,City Arena,Bangalore,2026-01-15
-Tech Expo,Convention Center,Hyderabad,2026-01-18
-Food Carnival,Town Hall,Chennai,2026-01-19
-Startup Meetup,Innovation Hub,Bangalore,2026-01-17
-Job Fair,Exhibition Grounds,Hyderabad,2026-01-20
-Book Fair,Public Library,Chennai,2026-01-24
-Cultural Night,Open Air Theatre,Bangalore,2026-01-25
-AI Conference,Tech Park,Hyderabad,2026-01-22
-Marathon Event,Beach Road,Chennai,2026-01-18
-Comedy Show,City Auditorium,Bangalore,2026-01-21
-Gaming Expo,Expo Center,Hyderabad,2026-01-26
-Art Exhibition,Art Gallery,Chennai,2026-01-23
-Music Concert,Indoor Stadium,Bangalore,2026-01-31
-Developer Summit,IT Convention Hall,Hyderabad,2026-02-01
-Street Food Festival,Central Park,Chennai,2026-02-02
-Startup Pitch Day,Business Center,Bangalore,2026-02-07
-Healthcare Seminar,Medical College Hall,Hyderabad,2026-02-08
-Film Festival,Cinema Complex,Chennai,2026-02-09
-Robotics Workshop,Engineering College,Bangalore,2026-02-14
-Education Expo,University Auditorium,Hyderabad,2026-02-15
+event_name,venue,city,event_date,temperature,rain,snow,weather_risk
+Open Air Music Festival,City Arena,Bangalore,2026-01-15,28,5,0,High Risk
+Tech Expo Indoor,Convention Center,Hyderabad,2026-01-18,30,0,0,Low Risk
+Street Food Carnival,Town Hall,Chennai,2026-01-19,31,8,0,High Risk
+Startup Meetup Outdoor,Innovation Hub,Bangalore,2026-01-17,27,0,0,Low Risk
+Job Fair Semi-Open,Exhibition Grounds,Hyderabad,2026-01-20,29,3,0,Low Risk
+Book Fair Indoor,Public Library,Chennai,2026-01-24,26,0,0,Low Risk
+Cultural Night Open Air,Open Air Theatre,Bangalore,2026-01-25,25,12,0,High Risk
+AI Conference Indoor,Tech Park,Hyderabad,2026-01-22,28,0,0,Low Risk
+City Marathon Outdoor,Beach Road,Chennai,2026-01-18,33,0,0,Low Risk
+Comedy Show Indoor,City Auditorium,Bangalore,2026-01-21,26,0,0,Low Risk
+Gaming Expo Indoor,Expo Center,Hyderabad,2026-01-26,29,0,0,Low Risk
+Art Exhibition Indoor,Art Gallery,Chennai,2026-01-23,27,0,0,Low Risk
+Live Music Concert Open,Indoor Stadium,Bangalore,2026-01-31,24,15,0,High Risk
+Developer Summit Indoor,IT Convention Hall,Hyderabad,2026-02-01,28,0,0,Low Risk
+Street Food Festival Outdoor,Central Park,Chennai,2026-02-02,32,10,0,High Risk
+Startup Pitch Outdoor,Business Center,Bangalore,2026-02-07,29,2,0,Low Risk
+Healthcare Seminar Indoor,Medical College Hall,Hyderabad,2026-02-08,27,0,0,Low Risk
+Film Festival Indoor,Cinema Complex,Chennai,2026-02-09,26,0,0,Low Risk
+Robotics Workshop Indoor,Engineering College,Bangalore,2026-02-14,25,0,0,Low Risk
+Education Expo Semi-Open,University Auditorium,Hyderabad,2026-02-15,30,6,0,High Risk
